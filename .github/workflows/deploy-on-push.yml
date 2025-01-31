@@ -3,21 +3,22 @@ on: [push]  # 触发条件：代码推送时自动运行
 
 jobs:
   deploy-app:
-    runs-on: ubuntu-latest  # 使用 GitHub 托管的 Ubuntu 环境
+    runs-on: ubuntu-latest  
 
     steps:
       # 步骤 1：检出代码到工作目录
       - name: Checkout code to build server
-        uses: actions/checkout@v4  # 官方提供的检出代码 Action
+        uses: actions/checkout@v4  
 
       # 步骤 2：通过 SCP 将文件复制到服务器
       - name: Copy files to server
-        uses: appleboy/scp-action@master  # 第三方 SCP 部署 Action
+        uses: appleboy/scp-action@master  
         with:
-          host: ${{ secrets.HOST }}          # 服务器 IP（从 Secrets 读取）
-          username: ${{ secrets.SSH_USER_NAME }}  # SSH 用户名（从 Secrets 读取）
-          port: ${{ secrets.SSH_PORT }}      # SSH 端口（默认 22）
+          host: ${{ secrets.HOST }}         
+          username: ${{ secrets.SSH_USER_NAME }}  
+          port: ${{ secrets.SSH_PORT }}     
           key: ${{ secrets.SSH_KEY }}        # SSH 私钥（从 Secrets 读取）
           source: "./html/*"                 # 要复制的文件路径（本地仓库的 html 目录下所有文件）
           target: "/var/www/html"            # 服务器目标路径（Nginx 默认静态资源目录）
-          strip_components: 1                # 去除源路径中的第一个目录（即跳过 "html" 目录）
+          strip_components: 1    
+                    
