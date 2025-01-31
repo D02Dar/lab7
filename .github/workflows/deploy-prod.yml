@@ -2,7 +2,7 @@ name: deploy on push production branch
 on:
   push:
     branches:
-      - prod  # only trigger when push to prod branch
+      - prod  
 
 jobs:
   deploy-app:
@@ -17,7 +17,7 @@ jobs:
           host: ${{ secrets.PROD_HOST }}  
           username: ${{ secrets.SSH_USER_NAME }}
           port: ${{ secrets.SSH_PORT }}
-          key: ${{ secrets.SSH_KEY }}
+          key: ${{ secrets.PORD_KEY }}
           source: "./html/**"
           target: "/var/www/html"
           strip_components: 1
