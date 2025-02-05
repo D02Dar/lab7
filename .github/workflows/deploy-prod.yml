@@ -2,7 +2,7 @@ name: deploy on push production branch
 on:
   push:
     branches:
-      - prod  # only trigger when push to prod branch
+      - prod  
 
 jobs:
   deploy-app:
@@ -15,9 +15,9 @@ jobs:
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.PROD_HOST }}  
-          username: ${{ secrets.SSH_USER_NAME }}
-          port: ${{ secrets.SSH_PORT }}
-          key: ${{ secrets.SSH_KEY }}
+          username: ${{ secrets.PROD_USER_NAME }}
+          port: ${{ secrets.PROD_PORT }}
+          key: ${{ secrets.PROD_KEY }}
           source: "./html/**"
           target: "/var/www/html"
           strip_components: 1
